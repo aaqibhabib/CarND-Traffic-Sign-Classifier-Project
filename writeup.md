@@ -18,11 +18,12 @@ The goals / steps of this project are the following:
 [image1]: ./examples/visualization.jpg "Visualization"
 [image2]: ./examples/grayscale.jpg "Grayscaling"
 [image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[image4]: ./street-view-signs/1.PNG "Traffic Sign 1"
+[image5]: ./street-view-signs/2.PNG "Traffic Sign 2"
+[image6]: ./street-view-signs/3.PNG "Traffic Sign 3"
+[image7]: ./street-view-signs/4.PNG "Traffic Sign 4"
+[image8]: ./street-view-signs/5.PNG "Traffic Sign 5"
+[image9]: ./examples/soft-max-distributions.JPG "Soft Max Distributions"
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -120,7 +121,7 @@ If a well known architecture was chosen:
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
 
 I first used the LeNet-5 project as described in the Udacity Lab. Since that performed well for recognizing handwritten numbers and letters, I figured it was a good starting point for traffic sign classifications. I trained using a 0.01 training rate without changing the architecture an using the color image patches and was able to achieve ~0.90 accuracy in teh training set. In order to improve this, I added a dropout layers after each activation for the fully connected layers. This increased a my test accuracy minimally. Then, I experimented with decreasing the learning rate and increasing the total number of epochs which had a noticeable impact on the test accuracy. Finally, I preprocessed the data by grayscaling the images and normalizing the histogram which ultimately allowed me to reach a training accuracy >0.93.
-
+ 
 There is a real concern of overfitting. You can see my training accuracy is slightly higher than both the validation set and test set. I combated overfitting by weakign the number of epochs used to train the model. Going from 50 to 45 epochs allowed me to reduce how overfitted the model became. Adding dropouts helped when I increased the number of epoch.
  
 
@@ -128,12 +129,12 @@ There is a real concern of overfitting. You can see my training accuracy is slig
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web:
+Below are five German traffic signs that I found on the web.
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![Right of way (11)][image4] ![Keep Right (38)][image5] ![Yield (13)][image6] 
+![No Entry (17)][image7] ![Speed Limit 50 (2)][image8]
 
-The first image might be difficult to classify because ...
+The first image might be difficult to classify because of the the dark background and limited lighting and low resolution of the center figure. The fourth image is also dark and skewed. The skewness will not be an issue once the image is resized.
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
@@ -141,31 +142,32 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
+| Right of way      		| Right of way   									| 
+| Keep Right     			| Keep Right 										|
 | Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| No Entry	      		| No Entry					 				|
+| Speed Limit 50km/h			| Speed Limit 50km/h      							|
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess 5 of the 5 traffic signs, which gives an accuracy of 100%. This compares favorably to the accuracy on the test set of 90%.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+The code for making predictions on my final model is located in the 16th cell of the Ipython notebook.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+For the first image, the model is fairly sure that this is a Right of Way sign (probability of 57%), and the image does contain a Right of Way sign. The top five soft max probabilities were
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+| 57%         			| Right of Way   									| 
+| 28%     				| Priority road 										|
+| 6%					| Pedestrians											|
+| 5%	      			| Roundabout Mandatory					 				|
+| 4%				    | End of no passing by vehicles over 3.5 metric tons      							|
 
 
-For the second image ... 
+Below is a visual showing each of the input and the top 5 guesses.
+![Top 5 Softmax][image9]
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
