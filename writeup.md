@@ -122,7 +122,9 @@ If a well known architecture was chosen:
 
 I first used the LeNet-5 project as described in the Udacity Lab. Since that performed well for recognizing handwritten numbers and letters, I figured it was a good starting point for traffic sign classifications. I trained using a 0.01 training rate without changing the architecture an using the color image patches and was able to achieve ~0.90 accuracy in teh training set. In order to improve this, I added a dropout layers after each activation for the fully connected layers. This increased a my test accuracy minimally. Then, I experimented with decreasing the learning rate and increasing the total number of epochs which had a noticeable impact on the test accuracy. Finally, I preprocessed the data by grayscaling the images and normalizing the histogram which ultimately allowed me to reach a training accuracy >0.93.
  
-There is a real concern of overfitting. You can see my training accuracy is slightly higher than both the validation set and test set. I combated overfitting by weakign the number of epochs used to train the model. Going from 50 to 45 epochs allowed me to reduce how overfitted the model became. Adding dropouts helped when I increased the number of epoch.
+There is a real concern of overfitting. You can see my training accuracy is slightly higher than both the validation set and test set. I combated overfitting by lowering the number of epochs used to train the model. Going from 50 to 45 epochs allowed me to reduce how overfitted the model became. Adding dropouts helped when I increased the number of epoch.
+
+Overall, the test, train, and validation accuracies are similar meaning the model is trained relatively well.
  
 
 ### Test a Model on New Images
