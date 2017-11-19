@@ -94,7 +94,7 @@ I implemented the LeNet-5 architecture with dropouts. My final model consisted o
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
 To train the model, I used following parameters:
-* Number of epochs = 50
+* Number of epochs = 45
 * Batch Size = 128
 * Learning Rate = 0.01
 * Optimizer = Adam Algorithm (Uses back propagation to train the network and minimize training loss)
@@ -103,9 +103,9 @@ To train the model, I used following parameters:
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
+* training set accuracy of: 0.976
+* validation set accuracy of: 0.938
+* test set accuracy of: 0.908
 
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
@@ -118,6 +118,10 @@ If a well known architecture was chosen:
 * What architecture was chosen?
 * Why did you believe it would be relevant to the traffic sign application?
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
+
+I first used the LeNet-5 project as described in the Udacity Lab. Since that performed well for recognizing handwritten numbers and letters, I figured it was a good starting point for traffic sign classifications. I trained using a 0.01 training rate without changing the architecture an using the color image patches and was able to achieve ~0.90 accuracy in teh training set. In order to improve this, I added a dropout layers after each activation for the fully connected layers. This increased a my test accuracy minimally. Then, I experimented with decreasing the learning rate and increasing the total number of epochs which had a noticeable impact on the test accuracy. Finally, I preprocessed the data by grayscaling the images and normalizing the histogram which ultimately allowed me to reach a training accuracy >0.93.
+
+There is a real concern of overfitting. You can see my training accuracy is slightly higher than both the validation set and test set. I combated overfitting by weakign the number of epochs used to train the model. Going from 50 to 45 epochs allowed me to reduce how overfitted the model became. Adding dropouts helped when I increased the number of epoch.
  
 
 ### Test a Model on New Images
